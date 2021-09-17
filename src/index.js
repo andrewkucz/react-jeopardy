@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 const Index = () => {
-  return <Router>
+  return <Router basename={process.env.PUBLIC_URL}>
   <Switch>
     <Route exact path="/">
       <Game />
