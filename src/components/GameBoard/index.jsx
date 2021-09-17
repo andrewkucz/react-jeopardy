@@ -9,7 +9,6 @@ const rowHeight = `1fr`
 
 const questionsCsv = new Blob([sample_questions], {type: 'text/plain'});
 
-
 const GameBoard = ({questionMap, setQuestion}) => {
   const categories = Object.keys(questionMap)
   const rowCount = getRowCount(questionMap)

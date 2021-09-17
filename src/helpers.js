@@ -108,3 +108,10 @@ export function useLocalStorage(key, initialValue) {
   return [storedValue, setValue];
 }
 
+
+export function stripLowerCase(str) {
+  if(str.length <= 1) {
+    return str
+  }
+  return str.split('').filter(letter => letter.toLowerCase() !== letter).join('')
+}

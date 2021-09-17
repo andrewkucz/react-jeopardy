@@ -8,8 +8,10 @@ import qs from './questions'
 //const initUsers = ['Anne', 'Andrew']
 const initQuestionMap = {}
 const initUsers = []
+const possibleOtherKeys = ['ControlLeft', 'ControlRight', 'ArrowLeft', 'ArrowRight','ArrowDown', 'ArrowUp', 'AltLeft', 'AltRight', 'ShiftLeft', 'ShiftRight', 'Enter']
 
-function Content({questionMap, markAnswered, users, scores, clickerKeys}) {
+
+function Content({questionMap, markAnswered, users, scores, clickerKeys, possibleOtherKeys}) {
 
   const [selected, setSelected] = useState(null)
 
@@ -21,7 +23,7 @@ function Content({questionMap, markAnswered, users, scores, clickerKeys}) {
     return <Question question={selected} markAnswered={(q, u) => {
       markAnswered(q, u)
       setSelected(null)
-    }} goBack={goBack} users={users} clickerKeys={clickerKeys}/>
+    }} goBack={goBack} users={users} clickerKeys={clickerKeys} possibleOtherKeys={possibleOtherKeys}/>
   }
   
   return (<GameBoard questionMap={questionMap} setQuestion={setSelected} scores={scores} />);
@@ -105,10 +107,10 @@ function Game() {
 
   return <>
   <div className="controls">
-    <Controls setClickerKey={setClickerKey} users={users} addUser={addUser} clearUsers={users.length > 0 && clearUsers} resetScores={users.length > 0 && resetScores} setQuestions={setQuestions} clickerKeys={clickerKeys} />
+    <Controls possibleOtherKeys={possibleOtherKeys} setClickerKey={setClickerKey} users={users} addUser={addUser} clearUsers={users.length > 0 && clearUsers} resetScores={users.length > 0 && resetScores} setQuestions={setQuestions} clickerKeys={clickerKeys} />
   </div>
   <div className="game">
-    <Content questionMap={questionMap} users={users} scores={scores} markAnswered={markAnswered} clickerKeys={clickerKeys} />
+    <Content possibleOtherKeys={possibleOtherKeys} questionMap={questionMap} users={users} scores={scores} markAnswered={markAnswered} clickerKeys={clickerKeys} />
     <ScoreBoard users={users} scores={scores} />
   </div>
   </>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-const Question = ({question, goBack, markAnswered, users, clickerKeys}) => {
+const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleOtherKeys}) => {
 
   const [clickerQueue, setClickerQueue] = useState([])
   const [showAnswer, setShowAnswer] = useState(false)
@@ -28,7 +28,10 @@ const Question = ({question, goBack, markAnswered, users, clickerKeys}) => {
 
   useEffect(() => {
     function onKeyDown(e) {
-      const i = users.findIndex(u => clickerKeys[u] === e.key)
+      let i = users.findIndex(u => clickerKeys[u] === e.key)
+      if(i === -1 && possibleOtherKeys.includes(e.code)) {
+        i = users.findIndex(u => clickerKeys[u] === e.code)
+      }
       if (i !== -1) {
         addToQueue(users[i])
       }

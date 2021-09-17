@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Game from './Game';
-import Clicker from './Clicker'
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,9 +13,6 @@ const Index = () => {
   <Switch>
     <Route exact path="/">
       <Game />
-    </Route>
-    <Route path="/clicker">
-      <Clicker />
     </Route>
   </Switch>
 </Router>

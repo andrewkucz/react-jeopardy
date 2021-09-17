@@ -1,6 +1,7 @@
 import React from 'react'
+import { stripLowerCase } from '../../helpers';
 
-const Controls = ({ addUser, clearUsers, resetScores, setQuestions, users, clickerKeys, setClickerKey }) => {
+const Controls = ({ addUser, clearUsers, resetScores, setQuestions, users, clickerKeys, setClickerKey, possibleOtherKeys }) => {
 
   const processCsv = () => {
     var fileUpload = document.getElementById("fileUpload");
@@ -37,21 +38,26 @@ const onFileChange = e => {
           <button onClick={processCsv}>Import Questions CSV</button>
           <button onClick={() => setQuestions('')}>Clear Questions</button>
         </div>
+        <div>
+
+        </div>
+
       </div>
       {users && users.length > 0 && <div style={{overflow: 'auto'}}>
         Clicker Keys:
         <div>
           {users.map(u => {
 
-            const display = clickerKeys[u] === ' ' ? 'Spc' : (clickerKeys[u] || `Set`)
+            const stripped = stripLowerCase(clickerKeys[u])
+            const display = clickerKeys[u] === ' ' ? 'Spc' : (stripped || `Set`)
 
             return <div key={u} style={{marginTop: 10}}>
               <button style={{display: 'inline-block', padding: '6px 0px', width: '2rem', marginRight: '0.5rem'}} onClick={() => {
-                let promptChar = window.prompt(`Enter a single key to set as the clicker for ${u}`)
-                if(promptChar && promptChar.length > 1) {
-                  alert('Please enter a valid single character for the clicker')
+                let p = window.prompt(`Enter a single key to set as the clicker for ${u}`)
+                if((p && p.length === 1) || possibleOtherKeys.includes(p)) {
+                  setClickerKey(u, p)
                 } else {
-                  setClickerKey(u, promptChar)
+                  alert('Please enter a valid key for the clicker. Either a single character or one of the following: ' + possibleOtherKeys.join(', ') + '.')
                 }
                 }}>{display}</button>{u}
             </div>
