@@ -24,7 +24,7 @@ const GameBoard = ({questionMap, setQuestion, possibleOtherKeys}) => {
           <GameTile category={category} isHeader style={{gridArea: `${1} / ${colIndex+1}`}} />
           {questionValues.map((questionValue, rowIndex) => {
           const question = questionMap[category][questionValue]
-          return <GameTile key={colIndex + '_' + rowIndex} style={{gridArea: `${rowIndex+1+1} / ${colIndex+1}`}} onClick={() => setQuestion(question)} {...question} />
+          return <GameTile key={colIndex + '_' + rowIndex} style={{gridArea: `${rowIndex+1+1} / ${colIndex+1}`}} onClick={() => !question.answered && setQuestion(question)} {...question} />
         })}
         </React.Fragment>
       })}

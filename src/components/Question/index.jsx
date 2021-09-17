@@ -66,10 +66,10 @@ const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleO
       <div className="text">
         {showAnswer ? question.answer : question.question}
       </div>
-      <div style={{minHeight: 35}}>
-      {!showAnswer && clickerQueue.length > 0 && <button onClick={() => setShowAnswer(true)}>Show Answer</button>}
-      </div>
-      {clickerQueue.length > 0 && <><p style={{margin: '8px 0',}}>
+      {!showAnswer && <div style={{minHeight: 35}}>
+        <button onClick={() => setShowAnswer(true)}>Show Answer</button>
+      </div>}
+      {clickerQueue.length > 0 && showAnswer && <><p style={{margin: '8px 0',}}>
         Award question to:
       </p>
       <div style={{display: 'flex', justifyContent: 'center'}}>
