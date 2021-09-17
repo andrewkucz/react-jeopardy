@@ -26,7 +26,7 @@ function Content({questionMap, markAnswered, users, scores, clickerKeys, possibl
     }} goBack={goBack} users={users} clickerKeys={clickerKeys} possibleOtherKeys={possibleOtherKeys}/>
   }
   
-  return (<GameBoard questionMap={questionMap} setQuestion={setSelected} scores={scores} />);
+  return (<GameBoard possibleOtherKeys={possibleOtherKeys} questionMap={questionMap} setQuestion={setSelected} scores={scores} />);
 }
 
 function Game() {

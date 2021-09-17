@@ -9,7 +9,7 @@ const rowHeight = `1fr`
 
 const questionsCsv = new Blob([sample_questions], {type: 'text/plain'});
 
-const GameBoard = ({questionMap, setQuestion}) => {
+const GameBoard = ({questionMap, setQuestion, possibleOtherKeys}) => {
   const categories = Object.keys(questionMap)
   const rowCount = getRowCount(questionMap)
 
@@ -34,6 +34,9 @@ const GameBoard = ({questionMap, setQuestion}) => {
       </p>
       <p>
         Be sure to set the clicker key for each player on the left by clicking the "Set" button for each player.
+      </p>
+      <p>
+        The clicker key can be any single character, or one of the following: {possibleOtherKeys.join(', ')}.
       </p>
       </div>
       </div>
