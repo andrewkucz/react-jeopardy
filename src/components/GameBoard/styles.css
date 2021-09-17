@@ -1,0 +1,69 @@
+.game-board {
+  height: 80%;
+  display: grid;
+  border: 8px solid black;
+  background-color: black;
+  gap: 8px;
+}
+
+.board  {
+  height: 80%;
+}
+
+.scores {
+  height: 20%;
+}
+
+.max-width {
+  max-width: 450px;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-scores {
+  display: grid;
+  background-color: black;
+  gap: 2px;
+  border: 2px solid black;
+  margin-top: 0.5rem;
+}
+
+.game-scores .name {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.game-scores .container {
+  padding: 2px;  
+}
+
+.game-scores .score {
+  text-align: center;
+  font-size: 2rem;
+}
+
+
+.game-board > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-board > div.score {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+span.dollar {
+  font-size: 1.5rem;
+  margin-right: 2px;
+  margin-bottom: -2px;
+}
+
+.game-board > div.category {
+  color: white;
+}
