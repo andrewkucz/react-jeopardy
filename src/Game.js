@@ -108,7 +108,11 @@ function Game() {
   }, [setClickerKeys])
 
   const setUserScore = useCallback(user => {
-    const newScore = window.prompt('Manually overwrite score for ' + user)
+    const p = window.prompt('Manually overwrite score for ' + user)
+    let newScore = parseInt(p)
+    if(isNaN(newScore)) {
+      newScore = 0
+    }
     setScores(sc => ({
       ...sc,
       [user]: newScore
