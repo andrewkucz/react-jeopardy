@@ -11,7 +11,7 @@ const initUsers = []
 const possibleOtherKeys = ['ControlLeft', 'ControlRight', 'ArrowLeft', 'ArrowRight','ArrowDown', 'ArrowUp', 'AltLeft', 'AltRight', 'ShiftLeft', 'ShiftRight', 'Enter']
 
 
-function Content({questionMap, markAnswered, users, scores, clickerKeys, possibleOtherKeys}) {
+function Content({questionMap, markAnswered, users, scores, clickerKeys, possibleOtherKeys, scorePenalty}) {
 
   const [selected, setSelected] = useState(null)
 
@@ -20,10 +20,12 @@ function Content({questionMap, markAnswered, users, scores, clickerKeys, possibl
   }, [setSelected])
 
   if(selected) {
-    return <Question question={selected} markAnswered={(q, u) => {
-      markAnswered(q, u)
-      setSelected(null)
-    }} goBack={goBack} users={users} clickerKeys={clickerKeys} possibleOtherKeys={possibleOtherKeys}/>
+    return <Question question={selected} markAnswered={(q, u, c, dontReturn) => {
+      markAnswered(q, u, c)
+      if(!dontReturn) {
+        setSelected(null)
+      }
+    }} goBack={goBack} users={users} clickerKeys={clickerKeys} possibleOtherKeys={possibleOtherKeys} scorePenalty={scorePenalty}/>
   }
   
   return (<GameBoard possibleOtherKeys={possibleOtherKeys} questionMap={questionMap} setQuestion={setSelected} scores={scores} />);
@@ -34,6 +36,7 @@ function Game() {
   const [questionMap, setQuestionMap] = useLocalStorage('questionMap', initQuestionMap)
   const [users, setUsers] = useLocalStorage('users', initUsers)
   const [scores, setScores] = useLocalStorage('userScores', {})
+  const [scorePenalty, setScorePenalty] = useLocalStorage('scorePenalty', false)
 
   const [clickerKeys, setClickerKeys] = useLocalStorage('userClickerKeys', {})
 
@@ -52,7 +55,7 @@ function Game() {
     })
   }, [users])
 
-  const markAnswered = useCallback((question, user) => {
+  const markAnswered = useCallback((question, user, correct) => {
     setQuestionMap(qm => ({
       ...qm,
       [question.category]: {
@@ -64,12 +67,13 @@ function Game() {
       }
     }))
     if(user) {
+      const modifier = scorePenalty && !correct ? -1 : 1
       setScores(sc => ({
         ...sc,
-        [user]: sc[user] + question.value
+        [user]: sc[user] + (question.value*modifier)
       }))
     }
-  }, [setQuestionMap, setScores])
+  }, [setQuestionMap, setScores, scorePenalty])
 
   const addUser = useCallback(() => {
     let newUser = window.prompt(`Enter player ${users.length+1} name:`)
@@ -103,15 +107,23 @@ function Game() {
     }))
   }, [setClickerKeys])
 
+  const setUserScore = useCallback(user => {
+    const newScore = window.prompt('Manually overwrite score for ' + user)
+    setScores(sc => ({
+      ...sc,
+      [user]: newScore
+    }))
+  }, [setScores])
+
 
 
   return <>
   <div className="controls">
-    <Controls possibleOtherKeys={possibleOtherKeys} setClickerKey={setClickerKey} users={users} addUser={addUser} clearUsers={users.length > 0 && clearUsers} resetScores={users.length > 0 && resetScores} setQuestions={setQuestions} clickerKeys={clickerKeys} />
+    <Controls possibleOtherKeys={possibleOtherKeys} setClickerKey={setClickerKey} users={users} addUser={addUser} clearUsers={users.length > 0 && clearUsers} resetScores={users.length > 0 && resetScores} setQuestions={setQuestions} clickerKeys={clickerKeys} setScorePenalty={setScorePenalty} scorePenalty={scorePenalty} />
   </div>
   <div className="game">
-    <Content possibleOtherKeys={possibleOtherKeys} questionMap={questionMap} users={users} scores={scores} markAnswered={markAnswered} clickerKeys={clickerKeys} />
-    <ScoreBoard users={users} scores={scores} />
+    <Content possibleOtherKeys={possibleOtherKeys} questionMap={questionMap} users={users} scores={scores} markAnswered={markAnswered} clickerKeys={clickerKeys} scorePenalty={scorePenalty} />
+    <ScoreBoard users={users} scores={scores} setUserScore={setUserScore} />
   </div>
   </>
 }

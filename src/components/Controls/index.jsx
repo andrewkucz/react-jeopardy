@@ -1,7 +1,7 @@
 import React from 'react'
 import { stripLowerCase } from '../../helpers';
 
-const Controls = ({ addUser, clearUsers, resetScores, setQuestions, users, clickerKeys, setClickerKey, possibleOtherKeys }) => {
+const Controls = ({ addUser, clearUsers, resetScores, setQuestions, users, clickerKeys, setClickerKey, possibleOtherKeys, setScorePenalty, scorePenalty }) => {
 
   const processCsv = () => {
     var fileUpload = document.getElementById("fileUpload");
@@ -39,7 +39,8 @@ const onFileChange = e => {
           <button onClick={() => setQuestions('')}>Clear Questions</button>
         </div>
         <div>
-
+        <input type="checkbox" id="scorePenalty" name="scorePenalty" value={scorePenalty} onChange={e => setScorePenalty(e.target.checked)} />
+        <label htmlFor="scorePenalty">Score Penalty</label>
         </div>
 
       </div>

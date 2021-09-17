@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleOtherKeys}) => {
+const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleOtherKeys, scorePenalty}) => {
 
   const [clickerQueue, setClickerQueue] = useState([])
   const [showAnswer, setShowAnswer] = useState(false)
@@ -25,6 +25,10 @@ const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleO
     },
     [setClickerQueue],
   )
+
+  const removeFromQueue = useCallback(u => {
+    setClickerQueue(cq => cq.filter(user => user !== u))
+  }, [setClickerQueue])
 
   useEffect(() => {
     function onKeyDown(e) {
@@ -53,7 +57,7 @@ const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleO
           })}
       </div>
       <div style={{position: 'absolute', bottom: '1rem', left: '1rem'}}>
-        <button onClick={() => markAnswered(question)}>No one got it</button>
+        <button onClick={() => markAnswered(question)}>No one</button>
       </div>
       <div className="header">
         <div className="score">${question.value}</div>
@@ -68,11 +72,21 @@ const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleO
       {clickerQueue.length > 0 && <><p>
         Award question to:
       </p>
-      <div>
-        {users.filter(u => clickerQueue.includes(u)).map(u => <button className="player-button" key={u} onClick={() => {
-          markAnswered(question, u)
-          clearQueue()
-        }}>{u}</button>)}
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+        {users.filter(u => clickerQueue.includes(u)).map(u => <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} key={u}>
+
+          <button className="player-button" onClick={() => {
+            markAnswered(question, u, true)
+            clearQueue()
+          }}>{u}</button>
+
+        {scorePenalty && <button style={{width: 75, padding: '4px 8px', color: 'red', marginTop: 10}} onClick={() => {
+            markAnswered(question, u, false, true)
+            removeFromQueue(u)
+          }}>wrong</button>}
+
+
+        </div>)}
       </div>      
       </>}
     </div>

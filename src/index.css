@@ -73,12 +73,9 @@ button {
   justify-content: center;
 }
 
-.question .player-button:not(:last-child) {
-  margin-right: 1rem;
-}
-
 .question .player-button {
-  min-width: 125px;
+  min-width: 100px;
+  margin: 0 10px;
 }
 
 .question > .go-back { 
