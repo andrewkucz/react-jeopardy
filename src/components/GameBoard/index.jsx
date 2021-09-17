@@ -4,6 +4,7 @@ import GameTile from './GameTile'
 import { getRowCount } from '../../helpers'
 import sample_questions from '../../questions'
 
+//@TODO fix min height and stuff for different cases
 const colWidth = `1fr`
 const rowHeight = `1fr`
 
