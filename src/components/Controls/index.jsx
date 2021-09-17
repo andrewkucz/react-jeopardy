@@ -38,9 +38,9 @@ const onFileChange = e => {
           <button onClick={processCsv}>Import Questions CSV</button>
           <button onClick={() => setQuestions('')}>Clear Questions</button>
         </div>
-        <div>
+        <div style={{marginTop: '12px'}}>
         <input type="checkbox" id="scorePenalty" name="scorePenalty" value={scorePenalty} onChange={e => setScorePenalty(e.target.checked)} />
-        <label htmlFor="scorePenalty">Score Penalty</label>
+        <label htmlFor="scorePenalty">Score Penalties</label>
         </div>
 
       </div>

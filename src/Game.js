@@ -36,7 +36,7 @@ function Game() {
   const [questionMap, setQuestionMap] = useLocalStorage('questionMap', initQuestionMap)
   const [users, setUsers] = useLocalStorage('users', initUsers)
   const [scores, setScores] = useLocalStorage('userScores', {})
-  const [scorePenalty, setScorePenalty] = useLocalStorage('scorePenalty', false)
+  const [scorePenalty, setScorePenalty] = useLocalStorage('scorePenalty', true)
 
   const [clickerKeys, setClickerKeys] = useLocalStorage('userClickerKeys', {})
 
