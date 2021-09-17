@@ -15,7 +15,7 @@ body {
 
 .game {
   height: 100%;
-  width: 75%;
+  width: 80%;
   color: white;
 }
 
@@ -61,7 +61,7 @@ button {
 }
 
 .question {
-  height: 85%;
+  height: 80%;
   width: 100%;
   text-align: center;
   position: relative;
@@ -80,14 +80,14 @@ button {
 
 .question > .go-back { 
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 0.75rem;
+  left: 0.75rem;
 }
 
 .question > .clicker-queue {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
   font-size: 14px;
 }
 .question > .clicker-queue > div {
@@ -95,14 +95,15 @@ button {
 }
 
 .question > .text {
-  padding-bottom: 1rem;
-  max-width: 400px;
-  font-size: 2rem;
+  padding: 0.5rem 0;
+  max-width: 500px;
+  font-size: 1.5rem;
   margin: auto;
-  min-height: 33vh;
+  min-height: 30vh;
+  overflow: auto;
 }
 
 .question > .header {
   padding-top: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }

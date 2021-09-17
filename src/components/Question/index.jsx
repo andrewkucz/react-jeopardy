@@ -56,7 +56,7 @@ const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleO
             return <div key={u}>{i+1}. {u}</div>
           })}
       </div>
-      <div style={{position: 'absolute', bottom: '1rem', left: '1rem'}}>
+      <div style={{position: 'absolute', bottom: '0.75rem', left: '0.75rem'}}>
         <button onClick={() => markAnswered(question)}>No one</button>
       </div>
       <div className="header">
@@ -69,7 +69,7 @@ const Question = ({question, goBack, markAnswered, users, clickerKeys, possibleO
       <div style={{minHeight: 35}}>
       {!showAnswer && clickerQueue.length > 0 && <button onClick={() => setShowAnswer(true)}>Show Answer</button>}
       </div>
-      {clickerQueue.length > 0 && <><p>
+      {clickerQueue.length > 0 && <><p style={{margin: '8px 0',}}>
         Award question to:
       </p>
       <div style={{display: 'flex', justifyContent: 'center'}}>
