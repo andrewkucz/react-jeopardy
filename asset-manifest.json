@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-jeopardy-2/static/css/main.bd420fed.chunk.css",
-    "main.js": "/react-jeopardy-2/static/js/main.479a368d.chunk.js",
-    "main.js.map": "/react-jeopardy-2/static/js/main.479a368d.chunk.js.map",
+    "main.js": "/react-jeopardy-2/static/js/main.bd36ca33.chunk.js",
+    "main.js.map": "/react-jeopardy-2/static/js/main.bd36ca33.chunk.js.map",
     "runtime-main.js": "/react-jeopardy-2/static/js/runtime-main.f8a4a9cf.js",
     "runtime-main.js.map": "/react-jeopardy-2/static/js/runtime-main.f8a4a9cf.js.map",
     "static/js/2.99146898.chunk.js": "/react-jeopardy-2/static/js/2.99146898.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.f8a4a9cf.js",
     "static/js/2.99146898.chunk.js",
     "static/css/main.bd420fed.chunk.css",
-    "static/js/main.479a368d.chunk.js"
+    "static/js/main.bd36ca33.chunk.js"
   ]
 }
