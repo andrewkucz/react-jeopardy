@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 export function processData(allText) {
     const commaPlaceHolder = '{{{comma}}}'
-    var allTextLines = allText.split(/\r\n|\n/).map(line => line.replace(/(".+[,].+")/g, match => match.replace(/,/g, commaPlaceHolder)));
+    var allTextLines = allText.split(/\r\n|\n/).map(line => line.replace(/("[^"]+")/g, match => match.replace(/,/g, commaPlaceHolder)));
     var headers = allTextLines[0].split(',');
     var lines = [];
     for (var i=1; i<allTextLines.length; i++) {
@@ -52,6 +52,7 @@ const groupByCategory = groupByProp('category')
 
 export function getInitQuestions(csvText) {
   const questions = processData(csvText).map(val => ({...val, answered: false}))
+  console.log(questions)
   const groupedByCategory = groupByCategory(questions)
 
   return Object.keys(groupedByCategory).reduce((acc, cat) => {
